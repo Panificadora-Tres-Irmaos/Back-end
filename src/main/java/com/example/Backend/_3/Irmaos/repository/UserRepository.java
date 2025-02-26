@@ -2,7 +2,18 @@ package com.example.Backend._3.Irmaos.repository;
 
 import com.example.Backend._3.Irmaos.entity.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 
 public interface UserRepository extends MongoRepository<User, String> {
+
+    User findUserById(String id);
+
+    User findUserByEmail(String email);
+
+    @Query(value = "{ '_id': ?0 }", delete = true)
+    long deleteUserById(String id);
+
+    @Query(value = "{ 'email': ?0 }", delete = true)
+    long deleteUserByEmail(String email);
 
 }
