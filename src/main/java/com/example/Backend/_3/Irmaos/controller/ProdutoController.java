@@ -31,7 +31,7 @@ public class ProdutoController {
         return createProdutoInputPort.createProduto(request);
     }
 
-    @GetMapping("find_produto_id")
+    @GetMapping("/find_produto_id")
     public Produto fetchProdutoById(@RequestParam String id) {
         return fetchProdutoInputPort.fetchProdutoById(id);
     }
