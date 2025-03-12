@@ -6,6 +6,7 @@ import com.example.Backend._3.Irmaos.ports.input.DeleteProdutoInputPort;
 import com.example.Backend._3.Irmaos.ports.input.FetchProdutoInputPort;
 import com.example.Backend._3.Irmaos.ports.input.UpdateProdutoInputPort;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*")
@@ -26,7 +27,7 @@ public class ProdutoController {
     private UpdateProdutoInputPort updateProdutoInputPort;
 
     @PostMapping("/create_produto")
-    public String createProduto(@RequestBody Produto request) {
+    public ResponseEntity<String> createProduto(@RequestBody Produto request) {
         return createProdutoInputPort.createProduto(request);
     }
 

@@ -7,8 +7,6 @@ import com.example.Backend._3.Irmaos.ports.output.FetchProdutoOutputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class FetchProdutoUseCase implements FetchProdutoInputPort {
 

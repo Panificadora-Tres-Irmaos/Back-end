@@ -5,6 +5,7 @@ import com.example.Backend._3.Irmaos.ports.input.CreateProdutoInputPort;
 import com.example.Backend._3.Irmaos.ports.output.CreateProdutoOutputPort;
 import com.example.Backend._3.Irmaos.ports.output.FetchProdutoOutputPort;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,13 +17,13 @@ public class CreateProdutoUseCase implements CreateProdutoInputPort {
     @Autowired
     private FetchProdutoOutputPort fetchProdutoOutputPort;
 
-    public String createProduto(Produto request) {
+    public ResponseEntity<String> createProduto(Produto request) {
         if (fetchProdutoOutputPort.fetchProdutoById(request.getId()) != null) {
-            return "Produto já existente!";
+            return ResponseEntity.status(409).body("Produto já existente!");
         }
 
         createProdutoOutputPort.createProduto(request);
-        return "Produto criado com sucesso!";
+        return ResponseEntity.status(201).body("Produto criado com sucesso!");
     }
 
 }
