@@ -4,7 +4,6 @@ import com.example.Backend._3.Irmaos.entity.Produto;
 import com.example.Backend._3.Irmaos.ports.input.CreateProdutoInputPort;
 import com.example.Backend._3.Irmaos.ports.output.CreateProdutoOutputPort;
 import com.example.Backend._3.Irmaos.ports.output.FetchProdutoOutputPort;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

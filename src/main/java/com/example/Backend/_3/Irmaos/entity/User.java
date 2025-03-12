@@ -3,6 +3,8 @@ package com.example.Backend._3.Irmaos.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document
 public class User {
 
@@ -17,9 +19,12 @@ public class User {
 
     private String email;
 
+    private List<ProdutoCarrinho> carrinho;
+
     private Cartao cartao;
 
     public static class Cartao {
+
         private String num_cartao;
 
         private Double saldo;
@@ -52,6 +57,55 @@ public class User {
                     ", saldo=" + saldo +
                     '}';
         }
+    }
+
+    public static class ProdutoCarrinho {
+
+        private String id;
+
+        private String nome;
+
+        private Double valor;
+
+        public ProdutoCarrinho(String id, String nome, Double valor) {
+            this.id = id;
+            this.nome = nome;
+            this.valor = valor;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getNome() {
+            return nome;
+        }
+
+        public void setNome(String nome) {
+            this.nome = nome;
+        }
+
+        public Double getValor() {
+            return valor;
+        }
+
+        public void setValor(Double valor) {
+            this.valor = valor;
+        }
+
+        @Override
+        public String toString() {
+            return "ProdutoCarrinho{" +
+                    "id='" + id + '\'' +
+                    ", nome='" + nome + '\'' +
+                    ", valor=" + valor +
+                    '}';
+        }
+
     }
 
     public User(String id, String nome, String sobrenome, String email, Cartao cartao) {
@@ -92,6 +146,18 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public List<ProdutoCarrinho> getCarrinho() {
+        return carrinho;
+    }
+
+    public void setCarrinho(List<ProdutoCarrinho> carrinho) {
+        this.carrinho = carrinho;
     }
 
     public Cartao getCartao() {
