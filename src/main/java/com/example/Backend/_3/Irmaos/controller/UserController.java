@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @PostMapping("/create_user")
-    public String createUser(User user) {
+    public String createUser(@RequestBody User user) {
         return createUserInputPort.createUser(user);
     }
 
