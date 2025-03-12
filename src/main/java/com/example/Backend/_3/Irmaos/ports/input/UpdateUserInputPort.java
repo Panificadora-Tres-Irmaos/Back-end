@@ -8,4 +8,8 @@ public interface UpdateUserInputPort {
 
     String updateUserByEmail(User user, String email);
 
+    String updateCarrinhoFromUserById(String user_id, String produto_id);
+
+    String makePurchase(String id, Double valor);
+
 }

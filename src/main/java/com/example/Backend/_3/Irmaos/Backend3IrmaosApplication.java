@@ -2,7 +2,9 @@ package com.example.Backend._3.Irmaos;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+@CrossOrigin("*")
 @SpringBootApplication
 public class Backend3IrmaosApplication {
 

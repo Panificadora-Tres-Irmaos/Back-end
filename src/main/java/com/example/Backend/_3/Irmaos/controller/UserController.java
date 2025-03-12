@@ -1,11 +1,14 @@
 package com.example.Backend._3.Irmaos.controller;
 
 import com.example.Backend._3.Irmaos.entity.User;
+import com.example.Backend._3.Irmaos.ports.input.CreateUserInputPort;
 import com.example.Backend._3.Irmaos.ports.input.DeleteUserInputPort;
 import com.example.Backend._3.Irmaos.ports.input.FetchUserInputPort;
 import com.example.Backend._3.Irmaos.ports.input.UpdateUserInputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -15,10 +18,15 @@ public class UserController {
     private FetchUserInputPort fetchUserInputPort;
 
     @Autowired
+    private CreateUserInputPort createUserInputPort;
+
+    @Autowired
     private UpdateUserInputPort updateUserInputPort;
 
     @Autowired
     private DeleteUserInputPort deleteUserInputPort;
+
+    //CRUD
 
     @GetMapping("/find_user_id")
     public User fetchUserById(@RequestParam String id) {
@@ -26,8 +34,13 @@ public class UserController {
     }
 
     @GetMapping("/find_user_email")
-    public User fetchUserByEmail(@RequestParam String email) {
-        return fetchUserInputPort.fetchUserByEmail(email);
+    public User fetchUserByEmail(@RequestParam String email, @RequestParam String password) {
+        return fetchUserInputPort.fetchUserByEmail(email, password);
+    }
+
+    @PostMapping("/create_user")
+    public String createUser(User user) {
+        return createUserInputPort.createUser(user);
     }
 
     @PutMapping("/update_user_id")
@@ -48,6 +61,23 @@ public class UserController {
     @DeleteMapping("/delete_user_email")
     public String deleteUserByEmail(@RequestParam String email) {
         return deleteUserInputPort.deleteUserByEmail(email);
+    }
+
+    // Funções do Cliente no Site
+
+    @PutMapping("/insert_produto")
+    public String insertProduto(@RequestParam String user_id, @RequestParam String produto_id) {
+        return updateUserInputPort.updateCarrinhoFromUserById(user_id, produto_id);
+    }
+
+    @GetMapping("/list_carrinho_id")
+    public List<User.ProdutoCarrinho> listProdutosCarrinho(@RequestParam String id) {
+        return fetchUserInputPort.listProdutos(id);
+    }
+
+    @PutMapping("/make_purchase")
+    public String makePurchase(@RequestParam String id, @RequestParam Double valor) {
+        return updateUserInputPort.makePurchase(id, valor);
     }
 
 }
