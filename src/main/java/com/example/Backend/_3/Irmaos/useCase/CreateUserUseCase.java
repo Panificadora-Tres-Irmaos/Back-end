@@ -1,12 +1,10 @@
 package com.example.Backend._3.Irmaos.useCase;
 
-import com.example.Backend._3.Irmaos.entity.Produto;
 import com.example.Backend._3.Irmaos.entity.User;
 import com.example.Backend._3.Irmaos.ports.input.CreateUserInputPort;
 import com.example.Backend._3.Irmaos.ports.output.CreateUserOutputPort;
 import com.example.Backend._3.Irmaos.ports.output.FetchUserOutputPort;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
