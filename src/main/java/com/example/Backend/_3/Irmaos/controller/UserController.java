@@ -6,6 +6,7 @@ import com.example.Backend._3.Irmaos.ports.input.DeleteUserInputPort;
 import com.example.Backend._3.Irmaos.ports.input.FetchUserInputPort;
 import com.example.Backend._3.Irmaos.ports.input.UpdateUserInputPort;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class UserController {
     }
 
     @PostMapping("/create_user")
-    public String createUser(@RequestBody User user) {
+    public ResponseEntity<String> createUser(@RequestBody User user) {
         return createUserInputPort.createUser(user);
     }
 

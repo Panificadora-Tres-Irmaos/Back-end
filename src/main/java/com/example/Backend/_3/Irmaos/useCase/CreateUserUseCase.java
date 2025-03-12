@@ -6,6 +6,8 @@ import com.example.Backend._3.Irmaos.ports.input.CreateUserInputPort;
 import com.example.Backend._3.Irmaos.ports.output.CreateUserOutputPort;
 import com.example.Backend._3.Irmaos.ports.output.FetchUserOutputPort;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,12 +19,12 @@ public class CreateUserUseCase implements CreateUserInputPort {
     @Autowired
     private FetchUserOutputPort fetchUserOutputPort;
 
-    public String createUser(User request) {
+    public ResponseEntity<String> createUser(User request) {
         if (fetchUserOutputPort.fetchUserById(request.getId()) != null) {
-            return "Produto já existente!";
+            return ResponseEntity.status(409).body("Cliente já existente!");
         }
 
         createUserOutputPort.createUser(request);
-        return "Produto criado com sucesso!";
+        return ResponseEntity.status(201).body("Cliente criado com sucesso!");
     }
 }
