@@ -7,9 +7,9 @@ import com.example.Backend._3.Irmaos.ports.input.FetchUserInputPort;
 import com.example.Backend._3.Irmaos.ports.input.UpdateUserInputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/user")
 public class UserController {
