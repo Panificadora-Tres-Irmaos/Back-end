@@ -18,7 +18,7 @@ public class CreateProdutoUseCase implements CreateProdutoInputPort {
     private FetchProdutoOutputPort fetchProdutoOutputPort;
 
     public ResponseEntity<String> createProduto(Produto request) {
-        if (fetchProdutoOutputPort.fetchProdutoById(request.getId()) != null) {
+        if (fetchProdutoOutputPort.fetchProdutoByNome(request.getNome()) != null) {
             return ResponseEntity.status(409).body("Produto já existente!");
         }
 
