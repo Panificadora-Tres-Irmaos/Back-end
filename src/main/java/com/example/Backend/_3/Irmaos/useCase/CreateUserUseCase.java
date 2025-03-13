@@ -18,7 +18,7 @@ public class CreateUserUseCase implements CreateUserInputPort {
     private FetchUserOutputPort fetchUserOutputPort;
 
     public ResponseEntity<String> createUser(User request) {
-        if (fetchUserOutputPort.fetchUserById(request.getId()) != null) {
+        if (fetchUserOutputPort.fetchUserByEmail(request.getEmail()) != null) {
             return ResponseEntity.status(409).body("Cliente já existente!");
         }
 
