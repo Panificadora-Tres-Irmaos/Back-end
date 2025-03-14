@@ -33,7 +33,7 @@ public class FetchUserUseCase implements FetchUserInputPort {
             throw new NotFoundException("Usuário não encontrado!");
         }
 
-        if (user.getSenha() != password) {
+        if (!user.getSenha().equals(password)) {
             throw new FailPasswordException("Senha incorreta");
         }
 
