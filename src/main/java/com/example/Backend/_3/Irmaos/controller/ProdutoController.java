@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = {"http://10.10.10.230", "http://10.10.11.19", "http://172.28.16.1"})
+@CrossOrigin(origins = {"http://10.10.10.230", "http://10.10.11.19", "http://172.28.16.1", "http://localhost:*"})
 @RestController
 @RequestMapping("/produto")
 public class ProdutoController {
