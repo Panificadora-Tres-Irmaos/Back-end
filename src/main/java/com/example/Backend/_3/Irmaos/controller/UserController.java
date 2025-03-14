@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public User fetchUserByEmail(@RequestParam String email, @RequestParam String password) {
+    public User fetchUserByEmail(@RequestParam String email, @RequestHeader String password) {
         return fetchUserInputPort.fetchUserByEmail(email, password);
     }
 
