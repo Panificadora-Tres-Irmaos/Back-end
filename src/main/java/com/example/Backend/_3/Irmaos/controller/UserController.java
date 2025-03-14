@@ -1,6 +1,7 @@
 package com.example.Backend._3.Irmaos.controller;
 
 import com.example.Backend._3.Irmaos.entity.User;
+import com.example.Backend._3.Irmaos.entity.request.RequestLogin;
 import com.example.Backend._3.Irmaos.ports.input.CreateUserInputPort;
 import com.example.Backend._3.Irmaos.ports.input.DeleteUserInputPort;
 import com.example.Backend._3.Irmaos.ports.input.FetchUserInputPort;
@@ -35,8 +36,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public User fetchUserByEmail(@RequestParam String email, @RequestParam String password) {
-        return fetchUserInputPort.fetchUserByEmail(email, password);
+    public User fetchUserByEmail(@RequestBody RequestLogin request) {
+        return fetchUserInputPort.fetchUserByEmail(request.getEmail(), request.getSenha());
     }
 
     @PostMapping("/create_user")
