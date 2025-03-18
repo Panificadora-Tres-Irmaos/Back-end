@@ -1,6 +1,5 @@
 package com.example.Backend._3.Irmaos.useCase;
 
-import com.example.Backend._3.Irmaos.entity.Produto;
 import com.example.Backend._3.Irmaos.entity.User;
 import com.example.Backend._3.Irmaos.ports.input.UpdateUserInputPort;
 import com.example.Backend._3.Irmaos.ports.output.FetchProdutoOutputPort;
@@ -73,7 +72,7 @@ public class UpdateUserUseCase implements UpdateUserInputPort {
         User antes = fetchUserOutputPort.fetchUserById(id);
 
         if (antes.getCartao().getSaldo() < valor) {
-
+            throw new RuntimeException("Saldo insuficiente");
         }
 
         antes.getCartao().setSaldo(antes.getCartao().getSaldo() - valor);
@@ -82,7 +81,7 @@ public class UpdateUserUseCase implements UpdateUserInputPort {
 
         User depois = fetchUserOutputPort.fetchUserById(id);
 
-        if (!antes.getCartao().getSaldo().equals(depois.getCartao().getNum_cartao())) {
+        if (!antes.getCartao().getSaldo().equals(depois.getCartao().getSaldo())) {
             return "Produto foi atualizado com sucesso!";
         }
         return "Produto não foi atualizado!";
