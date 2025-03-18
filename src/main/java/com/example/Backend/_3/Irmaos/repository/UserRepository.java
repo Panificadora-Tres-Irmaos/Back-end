@@ -8,9 +8,6 @@ public interface UserRepository extends MongoRepository<User, String> {
 
     User findUserByEmail(String email);
 
-    @Query(value = "{ '_id': ?0 }", delete = true)
-    long deleteUserById(String id);
-
     @Query(value = "{ 'email': ?0 }", delete = true)
     long deleteUserByEmail(String email);
 

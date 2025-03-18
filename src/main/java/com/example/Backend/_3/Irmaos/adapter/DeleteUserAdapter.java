@@ -11,11 +11,6 @@ public class DeleteUserAdapter implements DeleteUserOutputPort {
     @Autowired
     private UserRepository userRepository;
 
-    public boolean deleteUserById(String id) {
-        long deletedCount = userRepository.deleteUserById(id);
-        return deletedCount > 0;
-    }
-
     public boolean deleteUserByEmail(String email) {
         long deleteCount = userRepository.deleteUserByEmail(email);
         return deleteCount > 0;
