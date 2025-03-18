@@ -11,13 +11,6 @@ public class DeleteUserUseCase implements DeleteUserInputPort {
     @Autowired
     private DeleteUserOutputPort deleteUserOutputPort;
 
-    public String deleteUserById(String id) {
-        if (deleteUserOutputPort.deleteUserById(id)) {
-            return "Produto com id="+id+" foi deletado com sucesso!";
-        }
-        return "Produto com id="+id+" não foi deletado!";
-    }
-
     public String deleteUserByEmail(String email) {
         if (deleteUserOutputPort.deleteUserByEmail(email)) {
             return "Produto com id="+email+" foi deletado com sucesso!";

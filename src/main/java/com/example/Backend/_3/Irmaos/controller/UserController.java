@@ -45,11 +45,6 @@ public class UserController {
         return updateUserInputPort.updateUserByEmail(user, email);
     }
 
-    @DeleteMapping("/delete_user_id")
-    public String deleteUserById(@RequestParam String id) {
-        return deleteUserInputPort.deleteUserById(id);
-    }
-
     @DeleteMapping("/delete_user_email")
     public String deleteUserByEmail(@RequestParam String email) {
         return deleteUserInputPort.deleteUserByEmail(email);
@@ -62,14 +57,14 @@ public class UserController {
         return updateUserInputPort.updateCarrinhoFromUserByEmail(user_email, carrinho);
     }
 
-    @GetMapping("/list_carrinho_id")
-    public List<User.ProdutoCarrinho> listProdutosCarrinho(@RequestParam String id) {
-        return fetchUserInputPort.listProdutos(id);
+    @GetMapping("/list_carrinho_email")
+    public List<User.ProdutoCarrinho> listProdutosCarrinho(@RequestParam String email) {
+        return fetchUserInputPort.listProdutos(email);
     }
 
     @PutMapping("/make_purchase")
-    public String makePurchase(@RequestParam String id, @RequestParam Double valor) {
-        return updateUserInputPort.makePurchase(id, valor);
+    public String makePurchase(@RequestParam String email, @RequestParam Double valor) {
+        return updateUserInputPort.makePurchase(email, valor);
     }
 
 }
