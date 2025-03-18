@@ -51,17 +51,11 @@ public class UpdateUserUseCase implements UpdateUserInputPort {
         return "Produto não foi atualizado!";
     }
 
-    public String updateCarrinhoFromUserById(String user_id, String produto_id) {
+    public String updateCarrinhoFromUserById(String user_id, List<User.ProdutoCarrinho> carrinho) {
 
         User user_antes = fetchUserOutputPort.fetchUserById(user_id);
 
-        Produto produto = fetchProdutoOutputPort.fetchProdutoById(produto_id);
-
-        User.ProdutoCarrinho produtoCarrinho = new User.ProdutoCarrinho(produto.getId(), produto.getNome(), produto.getPreco());
-
-        List<User.ProdutoCarrinho> carrinho = user_antes.getCarrinho();
-
-        carrinho.add(produtoCarrinho);
+        user_antes.setCarrinho(carrinho);
 
         updateUserOutputPort.updateUserById(user_antes, user_id);
 

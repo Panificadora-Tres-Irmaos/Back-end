@@ -65,11 +65,14 @@ public class User {
 
         private String nome;
 
+        private int quantidade;
+
         private Double valor;
 
-        public ProdutoCarrinho(String id, String nome, Double valor) {
+        public ProdutoCarrinho(String id, String nome, int quantidade, Double valor) {
             this.id = id;
             this.nome = nome;
+            this.quantidade = quantidade;
             this.valor = valor;
         }
 
@@ -87,6 +90,14 @@ public class User {
 
         public void setNome(String nome) {
             this.nome = nome;
+        }
+
+        public int getQuantidade() {
+            return quantidade;
+        }
+
+        public void setQuantidade(int quantidade) {
+            this.quantidade = quantidade;
         }
 
         public Double getValor() {

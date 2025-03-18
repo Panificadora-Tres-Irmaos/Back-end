@@ -67,9 +67,9 @@ public class UserController {
 
     // Funções do Cliente no Site
 
-    @PutMapping("/insert_produto")
-    public String insertProduto(@RequestParam String user_id, @RequestParam String produto_id) {
-        return updateUserInputPort.updateCarrinhoFromUserById(user_id, produto_id);
+    @PutMapping("/update_carrinho")
+    public String updateCarrinho(@RequestParam String user_id, @RequestParam List<User.ProdutoCarrinho> carrinho) {
+        return updateUserInputPort.updateCarrinhoFromUserById(user_id, carrinho);
     }
 
     @GetMapping("/list_carrinho_id")
