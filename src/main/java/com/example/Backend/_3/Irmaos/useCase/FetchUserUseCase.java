@@ -16,16 +16,6 @@ public class FetchUserUseCase implements FetchUserInputPort {
     @Autowired
     private FetchUserOutputPort fetchUserOutputPort;
 
-    public User fetchUserById(String id) {
-        User user = fetchUserOutputPort.fetchUserById(id);
-
-        if (user == null) {
-            throw new NotFoundException("Usuário não encontrado!");
-        }
-
-        return user;
-    }
-
     public User fetchUserByEmail(String email, String password) {
         User user = fetchUserOutputPort.fetchUserByEmail(email);
 
@@ -40,8 +30,8 @@ public class FetchUserUseCase implements FetchUserInputPort {
         return user;
     }
 
-    public List<User.ProdutoCarrinho> listProdutos(String id) {
-        User user = fetchUserById(id);
+    public List<User.ProdutoCarrinho> listProdutos(String email) {
+        User user = fetchUserOutputPort.fetchUserByEmail(email);
 
         if (user.getCarrinho() != null) {
             throw new NullPointerException("Campo de carrinho vazio!");

@@ -6,11 +6,9 @@ import java.util.List;
 
 public interface UpdateUserInputPort {
 
-    String updateUserById(User user, String id);
-
     String updateUserByEmail(User user, String email);
 
-    String updateCarrinhoFromUserById(String user_id, List<User.ProdutoCarrinho> carrinho);
+    String updateCarrinhoFromUserByEmail(String user_email, List<User.ProdutoCarrinho> carrinho);
 
     String makePurchase(String id, Double valor);
 

@@ -30,11 +30,6 @@ public class UserController {
 
     //CRUD
 
-    @GetMapping("/find_user_id")
-    public User fetchUserById(@RequestParam String id) {
-        return fetchUserInputPort.fetchUserById(id);
-    }
-
     @PostMapping("/login")
     public User fetchUserByEmail(@RequestBody RequestLogin request) {
         return fetchUserInputPort.fetchUserByEmail(request.getEmail(), request.getSenha());
@@ -43,11 +38,6 @@ public class UserController {
     @PostMapping("/create_user")
     public ResponseEntity<String> createUser(@RequestBody User user) {
         return createUserInputPort.createUser(user);
-    }
-
-    @PutMapping("/update_user_id")
-    public String updateUserById(@RequestBody User user, @RequestParam String id) {
-        return updateUserInputPort.updateUserById(user, id);
     }
 
     @PutMapping("/update_user_email")
@@ -68,8 +58,8 @@ public class UserController {
     // Funções do Cliente no Site
 
     @PutMapping("/update_carrinho")
-    public String updateCarrinho(@RequestParam String user_id, @RequestParam List<User.ProdutoCarrinho> carrinho) {
-        return updateUserInputPort.updateCarrinhoFromUserById(user_id, carrinho);
+    public String updateCarrinho(@RequestParam String user_email, @RequestParam List<User.ProdutoCarrinho> carrinho) {
+        return updateUserInputPort.updateCarrinhoFromUserByEmail(user_email, carrinho);
     }
 
     @GetMapping("/list_carrinho_id")
