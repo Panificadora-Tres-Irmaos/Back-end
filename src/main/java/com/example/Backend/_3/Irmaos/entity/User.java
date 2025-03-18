@@ -8,15 +8,13 @@ import java.util.List;
 @Document
 public class User {
 
-    @Id
-    private String id;
-
     private String nome;
 
     private String sobrenome;
 
     private String senha;
 
+    @Id
     private String email;
 
     private List<ProdutoCarrinho> carrinho;
@@ -119,20 +117,11 @@ public class User {
 
     }
 
-    public User(String id, String nome, String sobrenome, String email, Cartao cartao) {
-        this.id = id;
+    public User(String nome, String sobrenome, String email, Cartao cartao) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;
         this.cartao = cartao;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -182,7 +171,6 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id='" + id + '\'' +
                 ", nome='" + nome + '\'' +
                 ", sobrenome='" + sobrenome + '\'' +
                 ", email='" + email + '\'' +
