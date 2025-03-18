@@ -22,20 +22,6 @@ public class UpdateUserUseCase implements UpdateUserInputPort {
     @Autowired
     private FetchProdutoOutputPort fetchProdutoOutputPort;
 
-    public String updateUserById(User user, String id) {
-
-        User antes = fetchUserOutputPort.fetchUserById(id);
-
-        updateUserOutputPort.updateUserById(user, id);
-
-        User depois = fetchUserOutputPort.fetchUserById(id);
-
-        if (antes != depois) {
-            return "Produto foi atualizado com sucesso!";
-        }
-        return "Produto não foi atualizado!";
-    }
-
     public String updateUserByEmail(User user, String email) {
 
         User antes = fetchUserOutputPort.fetchUserByEmail(email);
@@ -50,15 +36,15 @@ public class UpdateUserUseCase implements UpdateUserInputPort {
         return "Produto não foi atualizado!";
     }
 
-    public String updateCarrinhoFromUserById(String user_id, List<User.ProdutoCarrinho> carrinho) {
+    public String updateCarrinhoFromUserByEmail(String user_email, List<User.ProdutoCarrinho> carrinho) {
 
-        User user_antes = fetchUserOutputPort.fetchUserById(user_id);
+        User user_antes = fetchUserOutputPort.fetchUserByEmail(user_email);
 
         user_antes.setCarrinho(carrinho);
 
-        updateUserOutputPort.updateUserById(user_antes, user_id);
+        updateUserOutputPort.updateUserById(user_antes, user_email);
 
-        User user_depois = fetchUserOutputPort.fetchUserById(user_id);
+        User user_depois = fetchUserOutputPort.fetchUserByEmail(user_email);
 
         if (user_antes.getCarrinho() != user_depois.getCarrinho()) {
             return "Produto foi atualizado com sucesso!";
@@ -67,9 +53,9 @@ public class UpdateUserUseCase implements UpdateUserInputPort {
 
     }
 
-    public String makePurchase(String id, Double valor) {
+    public String makePurchase(String email, Double valor) {
 
-        User antes = fetchUserOutputPort.fetchUserById(id);
+        User antes = fetchUserOutputPort.fetchUserByEmail(email);
 
         if (antes.getCartao().getSaldo() < valor) {
             throw new RuntimeException("Saldo insuficiente");
@@ -77,9 +63,9 @@ public class UpdateUserUseCase implements UpdateUserInputPort {
 
         antes.getCartao().setSaldo(antes.getCartao().getSaldo() - valor);
 
-        updateUserOutputPort.updateUserById(antes, id);
+        updateUserOutputPort.updateUserById(antes, email);
 
-        User depois = fetchUserOutputPort.fetchUserById(id);
+        User depois = fetchUserOutputPort.fetchUserByEmail(email);
 
         if (!antes.getCartao().getSaldo().equals(depois.getCartao().getSaldo())) {
             return "Produto foi atualizado com sucesso!";

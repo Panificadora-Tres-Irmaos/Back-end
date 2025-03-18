@@ -12,8 +12,8 @@ public class UpdateUserAdapter implements UpdateUserOutputPort {
     @Autowired
     private UserRepositoryCustom userRepositoryCustom;
 
-    public void updateUserById(User user, String id) {
-        userRepositoryCustom.updateUserById(id, user);
+    public void updateUserById(User user, String email) {
+        userRepositoryCustom.updateUserByEmail(email, user);
     }
 
     public void updateUserByEmail(User user, String email) {

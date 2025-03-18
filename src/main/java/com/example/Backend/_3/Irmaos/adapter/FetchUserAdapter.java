@@ -12,10 +12,6 @@ public class FetchUserAdapter implements FetchUserOutputPort {
     @Autowired
     private UserRepository userRepository;
 
-    public User fetchUserById(String id) {
-        return userRepository.findUserById(id);
-    }
-
     public User fetchUserByEmail(String email) {
         return userRepository.findUserByEmail(email);
     }

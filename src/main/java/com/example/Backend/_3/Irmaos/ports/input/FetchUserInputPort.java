@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface FetchUserInputPort {
 
-    User fetchUserById(String id);
 
     User fetchUserByEmail(String email, String password);
 

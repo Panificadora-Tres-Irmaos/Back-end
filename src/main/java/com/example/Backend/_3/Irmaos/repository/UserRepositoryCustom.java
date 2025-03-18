@@ -15,22 +15,9 @@ public class UserRepositoryCustom {
     @Autowired
     private MongoTemplate mongoTemplate;
 
-    public void updateUserById(String id, User user) {
-        Query query = new Query(Criteria.where("_id").is(id));
-        Update update = new Update()
-                .set("id", user.getId()) // Adicione os campos necessários
-                .set("nome", user.getNome())
-                .set("sobrenome", user.getSobrenome())
-                .set("email", user.getEmail())
-                .set("cartao", user.getCartao());
-
-        mongoTemplate.updateFirst(query, update, Produto.class);
-    }
-
     public void updateUserByEmail(String email, User user) {
         Query query = new Query(Criteria.where("email").is(email));
         Update update = new Update()
-                .set("id", user.getId()) // Adicione os campos necessários
                 .set("nome", user.getNome())
                 .set("sobrenome", user.getSobrenome())
                 .set("email", user.getEmail())

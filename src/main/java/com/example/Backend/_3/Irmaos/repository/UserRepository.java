@@ -6,8 +6,6 @@ import org.springframework.data.mongodb.repository.Query;
 
 public interface UserRepository extends MongoRepository<User, String> {
 
-    User findUserById(String id);
-
     User findUserByEmail(String email);
 
     @Query(value = "{ '_id': ?0 }", delete = true)
