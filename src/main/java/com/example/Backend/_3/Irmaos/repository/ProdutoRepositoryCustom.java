@@ -22,6 +22,7 @@ public class ProdutoRepositoryCustom {
                 .set("nome", produto.getNome())
                 .set("categoria", produto.getCategoria())
                 .set("imagem", produto.getImagem())
+                .set("descricao", produto.getDescricao())
                 .set("preco", produto.getPreco());
 
         mongoTemplate.updateFirst(query, update, Produto.class);
