@@ -10,6 +10,8 @@ public interface UpdateUserInputPort {
 
     String updateCarrinhoFromUserByEmail(String user_email, List<User.ProdutoCarrinho> carrinho);
 
+    String insertProduto(String user_email, User.ProdutoCarrinho produto);
+
     String makePurchase(String id, Double valor);
 
 }

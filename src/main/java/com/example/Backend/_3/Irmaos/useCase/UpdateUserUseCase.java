@@ -1,5 +1,6 @@
 package com.example.Backend._3.Irmaos.useCase;
 
+import com.example.Backend._3.Irmaos.entity.Produto;
 import com.example.Backend._3.Irmaos.entity.User;
 import com.example.Backend._3.Irmaos.ports.input.UpdateUserInputPort;
 import com.example.Backend._3.Irmaos.ports.output.FetchProdutoOutputPort;
@@ -39,6 +40,27 @@ public class UpdateUserUseCase implements UpdateUserInputPort {
     public String updateCarrinhoFromUserByEmail(String user_email, List<User.ProdutoCarrinho> carrinho) {
 
         User user_antes = fetchUserOutputPort.fetchUserByEmail(user_email);
+
+        user_antes.setCarrinho(carrinho);
+
+        updateUserOutputPort.updateUserById(user_antes, user_email);
+
+        User user_depois = fetchUserOutputPort.fetchUserByEmail(user_email);
+
+        if (user_antes.getCarrinho() != user_depois.getCarrinho()) {
+            return "Produto foi atualizado com sucesso!";
+        }
+        return "Produto não foi atualizado!";
+
+    }
+
+    public String insertProduto(String user_email, User.ProdutoCarrinho produto) {
+
+        User user_antes = fetchUserOutputPort.fetchUserByEmail(user_email);
+
+        List<User.ProdutoCarrinho> carrinho = user_antes.getCarrinho();
+
+        carrinho.add(produto);
 
         user_antes.setCarrinho(carrinho);
 

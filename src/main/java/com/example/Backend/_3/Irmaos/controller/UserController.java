@@ -1,5 +1,6 @@
 package com.example.Backend._3.Irmaos.controller;
 
+import com.example.Backend._3.Irmaos.entity.Produto;
 import com.example.Backend._3.Irmaos.entity.User;
 import com.example.Backend._3.Irmaos.entity.request.RequestLogin;
 import com.example.Backend._3.Irmaos.ports.input.CreateUserInputPort;
@@ -55,6 +56,11 @@ public class UserController {
     @PutMapping("/update_carrinho")
     public String updateCarrinho(@RequestParam String user_email, @RequestParam List<User.ProdutoCarrinho> carrinho) {
         return updateUserInputPort.updateCarrinhoFromUserByEmail(user_email, carrinho);
+    }
+
+    @PutMapping("/insert_produto")
+    public String insertProduto(@RequestParam String user_email, @RequestBody User.ProdutoCarrinho produto) {
+        return updateUserInputPort.insertProduto(user_email, produto);
     }
 
     @GetMapping("/list_carrinho_email")
