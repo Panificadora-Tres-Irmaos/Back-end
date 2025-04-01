@@ -9,6 +9,8 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+
 @Component
 public class UserRepositoryCustom {
 
@@ -21,9 +23,18 @@ public class UserRepositoryCustom {
                 .set("nome", user.getNome())
                 .set("sobrenome", user.getSobrenome())
                 .set("email", user.getEmail())
+                .set("carrinho", user.getCarrinho())
                 .set("cartao", user.getCartao());
 
-        mongoTemplate.updateFirst(query, update, Produto.class);
+        mongoTemplate.updateFirst(query, update, User.class);
+    }
+
+    public void updateCarrinhoByEmail(ArrayList<User.ProdutoCarrinho> produtoCarrinho, String email) {
+        Query query = new Query(Criteria.where("email").is(email));
+        Update update = new Update()
+                .set("carrinho", produtoCarrinho);
+
+        mongoTemplate.upsert(query, update, User.class);
     }
 
 }

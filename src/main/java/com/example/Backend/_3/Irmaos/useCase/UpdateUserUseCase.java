@@ -69,14 +69,17 @@ public class UpdateUserUseCase implements UpdateUserInputPort {
 
         user_antes.setCarrinho(carrinho);
 
-        updateUserOutputPort.updateUserById(user_antes, user_email);
+        updateUserOutputPort.updateCarrinhoByEmail(carrinho, user_email);
 
         User user_depois = fetchUserOutputPort.fetchUserByEmail(user_email);
 
-        if (user_antes.getCarrinho() != user_depois.getCarrinho()) {
-            return "Produto foi atualizado com sucesso!";
+        System.out.println("Antes: "+user_antes);
+        System.out.println("Depois: "+user_depois);
+
+        if (!user_antes.getCarrinho().equals(user_depois.getCarrinho())) {
+            return "Carrinho foi atualizado com sucesso!";
         }
-        return "Produto não foi atualizado!";
+        return "Carrinho não foi atualizado!";
 
     }
 
