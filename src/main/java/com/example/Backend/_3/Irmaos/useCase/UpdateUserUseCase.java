@@ -9,6 +9,7 @@ import com.example.Backend._3.Irmaos.ports.output.UpdateUserOutputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -37,7 +38,7 @@ public class UpdateUserUseCase implements UpdateUserInputPort {
         return "Produto não foi atualizado!";
     }
 
-    public String updateCarrinhoFromUserByEmail(String user_email, List<User.ProdutoCarrinho> carrinho) {
+    public String updateCarrinhoFromUserByEmail(String user_email, ArrayList<User.ProdutoCarrinho> carrinho) {
 
         User user_antes = fetchUserOutputPort.fetchUserByEmail(user_email);
 
@@ -58,7 +59,11 @@ public class UpdateUserUseCase implements UpdateUserInputPort {
 
         User user_antes = fetchUserOutputPort.fetchUserByEmail(user_email);
 
-        List<User.ProdutoCarrinho> carrinho = user_antes.getCarrinho();
+        ArrayList<User.ProdutoCarrinho> carrinho = user_antes.getCarrinho();
+
+        if (carrinho == null) {
+            carrinho = new ArrayList<>();
+        }
 
         carrinho.add(produto);
 

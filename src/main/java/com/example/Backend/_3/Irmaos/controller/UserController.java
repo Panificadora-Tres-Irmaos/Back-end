@@ -10,6 +10,8 @@ import com.example.Backend._3.Irmaos.ports.input.UpdateUserInputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = {"http://10.10.10.230", "http://10.10.11.19", "http://172.28.16.1", "http://localhost:5173", "http://localhost:5174"})
@@ -54,7 +56,7 @@ public class UserController {
     // Funções do Cliente no Site
 
     @PutMapping("/update_carrinho")
-    public String updateCarrinho(@RequestParam String user_email, @RequestParam List<User.ProdutoCarrinho> carrinho) {
+    public String updateCarrinho(@RequestParam String user_email, @RequestParam ArrayList<User.ProdutoCarrinho> carrinho) {
         return updateUserInputPort.updateCarrinhoFromUserByEmail(user_email, carrinho);
     }
 

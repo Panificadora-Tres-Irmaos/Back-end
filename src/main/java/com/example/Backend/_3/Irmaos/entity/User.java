@@ -3,6 +3,7 @@ package com.example.Backend._3.Irmaos.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Document
@@ -17,7 +18,7 @@ public class User {
     @Id
     private String email;
 
-    private List<ProdutoCarrinho> carrinho;
+    private ArrayList<ProdutoCarrinho> carrinho;
 
     private Cartao cartao;
 
@@ -152,11 +153,11 @@ public class User {
         return senha;
     }
 
-    public List<ProdutoCarrinho> getCarrinho() {
+    public ArrayList<ProdutoCarrinho> getCarrinho() {
         return carrinho;
     }
 
-    public void setCarrinho(List<ProdutoCarrinho> carrinho) {
+    public void setCarrinho(ArrayList<ProdutoCarrinho> carrinho) {
         this.carrinho = carrinho;
     }
 
