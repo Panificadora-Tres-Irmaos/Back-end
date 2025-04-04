@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UpdateUserUseCase implements UpdateUserInputPort {
@@ -60,27 +61,34 @@ public class UpdateUserUseCase implements UpdateUserInputPort {
         User user_antes = fetchUserOutputPort.fetchUserByEmail(user_email);
 
         ArrayList<User.ProdutoCarrinho> carrinho = user_antes.getCarrinho();
-
         if (carrinho == null) {
             carrinho = new ArrayList<>();
         }
 
-        carrinho.add(produto);
+        Optional<User.ProdutoCarrinho> produtoEncontrado = carrinho.stream()
+                .filter(p -> p.getId().equals(produto.getId()))
+                .findFirst();
+
+        if (produtoEncontrado.isPresent()) {
+            User.ProdutoCarrinho p = produtoEncontrado.get();
+            p.setQuantidade(p.getQuantidade() + produto.getQuantidade());
+            p.setValor(p.getValor() + produto.getValor());
+        } else {
+            carrinho.add(produto);
+        }
 
         user_antes.setCarrinho(carrinho);
-
         updateUserOutputPort.updateCarrinhoByEmail(carrinho, user_email);
 
         User user_depois = fetchUserOutputPort.fetchUserByEmail(user_email);
 
-        System.out.println("Antes: "+user_antes);
-        System.out.println("Depois: "+user_depois);
+        System.out.println("Antes: " + user_antes);
+        System.out.println("Depois: " + user_depois);
 
         if (!user_antes.getCarrinho().equals(user_depois.getCarrinho())) {
             return "Carrinho foi atualizado com sucesso!";
         }
         return "Carrinho não foi atualizado!";
-
     }
 
     public String makePurchase(String email, Double valor) {
