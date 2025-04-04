@@ -3,6 +3,7 @@ package com.example.Backend._3.Irmaos.useCase;
 import com.example.Backend._3.Irmaos.entity.User;
 import com.example.Backend._3.Irmaos.exception.FailPasswordException;
 import com.example.Backend._3.Irmaos.exception.NotFoundException;
+import com.example.Backend._3.Irmaos.exception.NullPointerException;
 import com.example.Backend._3.Irmaos.ports.input.FetchUserInputPort;
 import com.example.Backend._3.Irmaos.ports.output.FetchUserOutputPort;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class FetchUserUseCase implements FetchUserInputPort {
     public List<User.ProdutoCarrinho> listProdutos(String email) {
         User user = fetchUserOutputPort.fetchUserByEmail(email);
 
-        if (user.getCarrinho() != null) {
+        if (user.getCarrinho() == null) {
             throw new NullPointerException("Campo de carrinho vazio!");
         }
 
