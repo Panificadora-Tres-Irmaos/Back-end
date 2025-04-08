@@ -2,6 +2,7 @@ package com.example.Backend._3.Irmaos.handler;
 
 import com.example.Backend._3.Irmaos.entity.ErrorPersonalizado;
 import com.example.Backend._3.Irmaos.exception.FailPasswordException;
+import com.example.Backend._3.Irmaos.exception.InsuficientFundsException;
 import com.example.Backend._3.Irmaos.exception.NotFoundException;
 import com.example.Backend._3.Irmaos.exception.NullPointerException;
 import org.springframework.http.HttpStatus;
@@ -32,6 +33,14 @@ public class GlobalExceptionHandler {
     public ErrorPersonalizado handler(com.example.Backend._3.Irmaos.exception.NullPointerException ex) {
         return new ErrorPersonalizado(ex.getMessage());
     }
+
+    @ResponseBody
+    @ResponseStatus(HttpStatus.PAYMENT_REQUIRED) // Define o status HTTP 404
+    @ExceptionHandler(InsuficientFundsException.class)
+    public ErrorPersonalizado handler(InsuficientFundsException ex) {
+        return new ErrorPersonalizado(ex.getMessage());
+    }
+
 
 
 }

@@ -2,6 +2,7 @@ package com.example.Backend._3.Irmaos.useCase;
 
 import com.example.Backend._3.Irmaos.entity.Produto;
 import com.example.Backend._3.Irmaos.entity.User;
+import com.example.Backend._3.Irmaos.exception.InsuficientFundsException;
 import com.example.Backend._3.Irmaos.ports.input.UpdateUserInputPort;
 import com.example.Backend._3.Irmaos.ports.output.FetchProdutoOutputPort;
 import com.example.Backend._3.Irmaos.ports.output.FetchUserOutputPort;
@@ -95,17 +96,18 @@ public class UpdateUserUseCase implements UpdateUserInputPort {
 
         User antes = fetchUserOutputPort.fetchUserByEmail(email);
 
-        if (antes.getCartao().getSaldo() < valor) {
-            throw new RuntimeException("Saldo insuficiente");
+        if (antes.getSaldo() < valor) {
+            throw new InsuficientFundsException("Saldo insuficiente");
         }
 
-        antes.getCartao().setSaldo(antes.getCartao().getSaldo() - valor);
+        antes.setSaldo(antes.getSaldo() - valor);
+        antes.setCarrinho(new ArrayList<>());
 
         updateUserOutputPort.updateUserById(antes, email);
 
         User depois = fetchUserOutputPort.fetchUserByEmail(email);
 
-        if (!antes.getCartao().getSaldo().equals(depois.getCartao().getSaldo())) {
+        if (!antes.getSaldo().equals(depois.getSaldo())) {
             return "Compra foi efetuada com sucesso!";
         }
         return "Compra não foi efetuada!";
