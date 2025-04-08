@@ -23,7 +23,9 @@ public class UserRepositoryCustom {
                 .set("nome", user.getNome())
                 .set("sobrenome", user.getSobrenome())
                 .set("email", user.getEmail())
-                .set("carrinho", user.getCarrinho());
+                .set("carrinho", user.getCarrinho())
+                .set("saldo", user.getSaldo());
+
 
         mongoTemplate.updateFirst(query, update, User.class);
     }

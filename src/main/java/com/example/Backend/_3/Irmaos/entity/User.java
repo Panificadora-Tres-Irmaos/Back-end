@@ -1,5 +1,6 @@
 package com.example.Backend._3.Irmaos.entity;
 
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -90,6 +91,8 @@ public class User {
         this.sobrenome = sobrenome;
         this.nome = nome;
     }
+
+    public User() {}
 
     public User(String nome, String sobrenome, String email, Double saldo) {
         this.nome = nome;

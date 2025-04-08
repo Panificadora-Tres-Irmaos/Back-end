@@ -1,9 +1,7 @@
 package com.example.Backend._3.Irmaos.handler;
 
 import com.example.Backend._3.Irmaos.entity.ErrorPersonalizado;
-import com.example.Backend._3.Irmaos.exception.FailPasswordException;
-import com.example.Backend._3.Irmaos.exception.InsuficientFundsException;
-import com.example.Backend._3.Irmaos.exception.NotFoundException;
+import com.example.Backend._3.Irmaos.exception.*;
 import com.example.Backend._3.Irmaos.exception.NullPointerException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -41,6 +39,11 @@ public class GlobalExceptionHandler {
         return new ErrorPersonalizado(ex.getMessage());
     }
 
-
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(SameValuesException.class)
+    public ErrorPersonalizado handler(SameValuesException ex) {
+        return new ErrorPersonalizado(ex.getMessage());
+    }
 
 }
