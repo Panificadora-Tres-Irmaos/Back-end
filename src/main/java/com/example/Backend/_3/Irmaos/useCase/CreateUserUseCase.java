@@ -22,6 +22,8 @@ public class CreateUserUseCase implements CreateUserInputPort {
             return ResponseEntity.status(409).body("User já existente!");
         }
 
+        request.setSaldo(1000.00);
+
         createUserOutputPort.createUser(request);
         return ResponseEntity.status(201).body("User criado com sucesso!");
     }

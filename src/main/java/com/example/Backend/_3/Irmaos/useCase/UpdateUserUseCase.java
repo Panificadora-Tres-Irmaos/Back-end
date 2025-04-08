@@ -1,7 +1,7 @@
 package com.example.Backend._3.Irmaos.useCase;
 
-import com.example.Backend._3.Irmaos.entity.Produto;
 import com.example.Backend._3.Irmaos.entity.User;
+import com.example.Backend._3.Irmaos.exception.SameValuesException;
 import com.example.Backend._3.Irmaos.exception.InsuficientFundsException;
 import com.example.Backend._3.Irmaos.ports.input.UpdateUserInputPort;
 import com.example.Backend._3.Irmaos.ports.output.FetchProdutoOutputPort;
@@ -10,8 +10,9 @@ import com.example.Backend._3.Irmaos.ports.output.UpdateUserOutputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -99,17 +100,25 @@ public class UpdateUserUseCase implements UpdateUserInputPort {
             throw new InsuficientFundsException("Saldo insuficiente");
         }
 
-        antes.setSaldo(antes.getSaldo() - valor);
+        System.out.println("Saldo Antes: "+antes.getSaldo());
+
+        Double antigoSaldo = antes.getSaldo();
+
+        antes.setSaldo(antigoSaldo - valor);
         antes.setCarrinho(new ArrayList<>());
 
         updateUserOutputPort.updateUserById(antes, email);
 
         User depois = fetchUserOutputPort.fetchUserByEmail(email);
 
-        if (!antes.getSaldo().equals(depois.getSaldo())) {
-            return "Compra foi efetuada com sucesso!";
+        System.out.println("Saldo Depois: " + depois.getSaldo());
+
+        double epsilon = 0.00001; // tolerância
+
+        if (Math.abs(antigoSaldo - depois.getSaldo()) < epsilon) {
+            throw new SameValuesException("Compra não foi efetuada!");
         }
-        return "Compra não foi efetuada!";
+        return "Compra foi efetuada com sucesso!";
     }
 
 }
