@@ -50,9 +50,9 @@ public class UpdateUserUseCase implements UpdateUserInputPort {
         User user_depois = fetchUserOutputPort.fetchUserByEmail(user_email);
 
         if (user_antes.getCarrinho() != user_depois.getCarrinho()) {
-            return "Produto foi atualizado com sucesso!";
+            return "Carrinho foi atualizado com sucesso!";
         }
-        return "Produto não foi atualizado!";
+        return "Carrinho não foi atualizado!";
 
     }
 
@@ -106,9 +106,9 @@ public class UpdateUserUseCase implements UpdateUserInputPort {
         User depois = fetchUserOutputPort.fetchUserByEmail(email);
 
         if (!antes.getCartao().getSaldo().equals(depois.getCartao().getSaldo())) {
-            return "Produto foi atualizado com sucesso!";
+            return "Compra foi efetuada com sucesso!";
         }
-        return "Produto não foi atualizado!";
+        return "Compra não foi efetuada!";
     }
 
 }
