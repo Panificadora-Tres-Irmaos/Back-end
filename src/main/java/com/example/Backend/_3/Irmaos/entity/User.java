@@ -20,43 +20,7 @@ public class User {
 
     private ArrayList<ProdutoCarrinho> carrinho;
 
-    private Cartao cartao;
-
-    public static class Cartao {
-
-        private String num_cartao;
-
-        private Double saldo;
-
-        public Cartao(String num_cartao, Double saldo) {
-            this.num_cartao = num_cartao;
-            this.saldo = saldo;
-        }
-
-        public String getNum_cartao() {
-            return num_cartao;
-        }
-
-        public void setNum_cartao(String num_cartao) {
-            this.num_cartao = num_cartao;
-        }
-
-        public Double getSaldo() {
-            return saldo;
-        }
-
-        public void setSaldo(Double saldo) {
-            this.saldo = saldo;
-        }
-
-        @Override
-        public String toString() {
-            return "Cartao{" +
-                    "num_cartao='" + num_cartao + '\'' +
-                    ", saldo=" + saldo +
-                    '}';
-        }
-    }
+    private Double saldo;
 
     public static class ProdutoCarrinho {
 
@@ -118,11 +82,20 @@ public class User {
 
     }
 
-    public User(String nome, String sobrenome, String email, Cartao cartao) {
+    public User(Double saldo, ArrayList<ProdutoCarrinho> carrinho, String email, String senha, String sobrenome, String nome) {
+        this.saldo = saldo;
+        this.carrinho = carrinho;
+        this.email = email;
+        this.senha = senha;
+        this.sobrenome = sobrenome;
+        this.nome = nome;
+    }
+
+    public User(String nome, String sobrenome, String email, Double saldo) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;
-        this.cartao = cartao;
+        this.saldo = saldo;
     }
 
     public String getNome() {
@@ -161,21 +134,23 @@ public class User {
         this.carrinho = carrinho;
     }
 
-    public Cartao getCartao() {
-        return cartao;
+    public Double getSaldo() {
+        return saldo;
     }
 
-    public void setCartao(Cartao cartao) {
-        this.cartao = cartao;
+    public void setSaldo(Double saldo) {
+        this.saldo = saldo;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                ", nome='" + nome + '\'' +
+                "nome='" + nome + '\'' +
                 ", sobrenome='" + sobrenome + '\'' +
+                ", senha='" + senha + '\'' +
                 ", email='" + email + '\'' +
-                ", cartao=" + cartao +
+                ", carrinho=" + carrinho +
+                ", saldo=" + saldo +
                 '}';
     }
 }
