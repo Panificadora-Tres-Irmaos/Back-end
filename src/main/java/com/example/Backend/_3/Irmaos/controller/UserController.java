@@ -70,7 +70,7 @@ public class UserController {
         return fetchUserInputPort.listProdutos(email);
     }
 
-    @PutMapping("/make_purchase")
+    @PostMapping("/make_purchase")
     public String makePurchase(@RequestParam String email, @RequestParam Double valor) {
         return updateUserInputPort.makePurchase(email, valor);
     }
