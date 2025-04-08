@@ -73,7 +73,6 @@ public class UpdateUserUseCase implements UpdateUserInputPort {
         if (produtoEncontrado.isPresent()) {
             User.ProdutoCarrinho p = produtoEncontrado.get();
             p.setQuantidade(p.getQuantidade() + produto.getQuantidade());
-            p.setValor(p.getValor() + produto.getValor());
         } else {
             carrinho.add(produto);
         }
