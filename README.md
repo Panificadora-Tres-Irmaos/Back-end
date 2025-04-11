@@ -30,3 +30,9 @@ Acesse a pasta do projeto:
 cd Back-end
 ```
 Abra o projeto no IntelliJ IDEA e execute a aplicação.
+
+## Autores
+
+- [@Diogobq7](https://github.com/Diogobq7)
+- [@daniell0154](https://github.com/daniell0154)
+- [@Alisson1471](https://github.com/Alisson1471)
