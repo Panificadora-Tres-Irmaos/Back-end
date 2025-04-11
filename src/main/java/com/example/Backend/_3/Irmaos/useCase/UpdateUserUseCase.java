@@ -1,6 +1,8 @@
 package com.example.Backend._3.Irmaos.useCase;
 
 import com.example.Backend._3.Irmaos.entity.User;
+import com.example.Backend._3.Irmaos.exception.NotFoundException;
+import com.example.Backend._3.Irmaos.exception.NullPointerException;
 import com.example.Backend._3.Irmaos.exception.SameValuesException;
 import com.example.Backend._3.Irmaos.exception.InsuficientFundsException;
 import com.example.Backend._3.Irmaos.ports.input.UpdateUserInputPort;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -91,6 +94,38 @@ public class UpdateUserUseCase implements UpdateUserInputPort {
         }
         return "Carrinho não foi atualizado!";
     }
+
+    public String deleteProduto(String user_email, String produto_id) {
+
+        User user_antes = fetchUserOutputPort.fetchUserByEmail(user_email);
+
+        List<User.ProdutoCarrinho> carrinhoAntes = new ArrayList<>(user_antes.getCarrinho());
+        ArrayList<User.ProdutoCarrinho> carrinho = user_antes.getCarrinho();
+
+        if (carrinho == null) {
+            throw new NullPointerException("Carrinho é vazio!");
+        }
+
+        boolean removido = carrinho.removeIf(p -> p.getId().equals(produto_id));
+
+        if (!removido) {
+            throw new NullPointerException("Produto não encontrado!");
+        }
+
+        user_antes.setCarrinho(carrinho);
+        updateUserOutputPort.updateCarrinhoByEmail(carrinho, user_email);
+
+        User user_depois = fetchUserOutputPort.fetchUserByEmail(user_email);
+
+        System.out.println("Antes: " + carrinhoAntes);
+        System.out.println("Depois: " + user_depois.getCarrinho());
+
+        if (!carrinhoAntes.equals(user_depois.getCarrinho())) {
+            return "Carrinho foi atualizado com sucesso!";
+        }
+        return "Carrinho não foi atualizado!";
+    }
+
 
     public String makePurchase(String email, Double valor) {
 

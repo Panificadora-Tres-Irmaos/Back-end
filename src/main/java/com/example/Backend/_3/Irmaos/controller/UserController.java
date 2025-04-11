@@ -60,6 +60,11 @@ public class UserController {
         return updateUserInputPort.updateCarrinhoFromUserByEmail(user_email, carrinho);
     }
 
+    @PatchMapping("/delete_produto_carrinho")
+    public String deleteProdutoCarrinho(@RequestParam String user_email, @RequestParam String produto_id) {
+        return updateUserInputPort.deleteProduto(user_email, produto_id);
+    }
+
     @PutMapping("/insert_produto")
     public String insertProduto(@RequestParam String user_email, @RequestBody User.ProdutoCarrinho produto) {
         return updateUserInputPort.insertProduto(user_email, produto);

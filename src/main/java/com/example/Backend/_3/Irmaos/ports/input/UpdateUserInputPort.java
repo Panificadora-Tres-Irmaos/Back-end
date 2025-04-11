@@ -11,6 +11,8 @@ public interface UpdateUserInputPort {
 
     String updateCarrinhoFromUserByEmail(String user_email, ArrayList<User.ProdutoCarrinho> carrinho);
 
+    String deleteProduto(String user_email, String produto_id);
+
     String insertProduto(String user_email, User.ProdutoCarrinho produto);
 
     String makePurchase(String id, Double valor);
